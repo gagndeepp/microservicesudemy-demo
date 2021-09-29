@@ -7,9 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="jpa" />
+        <module name="currency-conversion" />
         <module name="currency-exchange" />
         <module name="cloud-config-server" />
-        <module name="currency-conversion" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
