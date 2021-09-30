@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class ConversionController {
 
     @Autowired
-    private CurrencyExchangeProxy cep;
+    CurrencyExchangeProxy cep;
 
     @GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversion calculateConversion(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity){
