@@ -1,7 +1,7 @@
 package com.microservice.currencyconversion.controller;
 
 import com.microservice.currencyconversion.beans.CurrencyConversion;
-import com.microservice.currencyconversion.proxy.CurrencyExchangeProxy;
+import com.microservice.currencyconversion.proxies.CurrencyExchangeProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class ConversionController {
 
     @Autowired
-    private CurrencyExchangeProxy cep;
+    CurrencyExchangeProxy currencyExchangeProxy;
 
     @GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversion calculateConversion(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity){
@@ -47,12 +47,10 @@ public class ConversionController {
 //        ResponseEntity<CurrencyConversion> responseEntity = new RestTemplate().getForEntity("http://localhost:8001/currency-exchange/from/{from}/to/{to}",
 //                CurrencyConversion.class,uriVars);
 
-        CurrencyConversion currencyConversion = cep.getCurrencyExchange(from,to);
+        CurrencyConversion currencyConversion = currencyExchangeProxy.getCurrencyExchange(from,to);
         currencyConversion.setQuantity(quantity);
         currencyConversion.setCalculatedValue(quantity.multiply(currencyConversion.getConversionMultiple()));
 
         return currencyConversion;
-
-
     }
 }
